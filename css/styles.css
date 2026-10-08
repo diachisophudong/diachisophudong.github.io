@@ -646,7 +646,8 @@ button {
     max-width: 86%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 1vh;
+    /* 5vh đệm giữa hàng logo+org-line và phần ảnh/nội dung bên dưới (yêu cầu owner) */
+    margin-top: 6vh;
   }
 
   .search-zone {
