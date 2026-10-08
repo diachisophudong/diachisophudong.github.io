@@ -592,9 +592,9 @@ button {
   position: absolute;
   left: 2vw;
   right: auto;
-  bottom: 3vh;
-  width: 48vw;
-  max-width: 200px;
+  bottom: 1vh;
+  width: 42vw;
+  max-width: 178px;
   z-index: 5;
   pointer-events: none;
 }
