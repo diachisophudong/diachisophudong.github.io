@@ -15,6 +15,16 @@ const DEBOUNCE_MS = 120;
 const COMMUNE_MAP_URL =
   'https://www.google.com/maps/search/?api=1&query=X%C3%A3+Ph%C3%B9+%C4%90%E1%BB%95ng';
 
+// Chuẩn hoá tìm kiếm: chữ thường, bỏ dấu thanh/khu biệt, đ -> d
+// ("Nguyễn" ~ "nguyen") — dùng cho cả từ khoá và dữ liệu.
+function chuanHoa(str) {
+  return String(str)
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/đ/g, 'd');
+}
+
 // Biểu tượng SVG nội tuyến (không dùng emoji)
 const ICONS = {
   person:
@@ -208,7 +218,7 @@ function handleDocumentClick(e) {
 
 // Lọc dữ liệu theo từ khoá + bộ lọc, nhóm theo family_id
 function filterAndGroupData(query) {
-  const lowerQuery = query.toLowerCase();
+  const nQuery = chuanHoa(query);
   const dobFilterValue = dobFilter.value.trim();
   const villageFilterValue = villageFilter.value.trim().toLowerCase();
 
@@ -229,21 +239,13 @@ function filterAndGroupData(query) {
       return false;
     }
 
-    const name = person.person.toLowerCase();
-    const address = person.address.toLowerCase();
-    const hamlet = person.hamlet.toLowerCase();
-    const village = person.village.toLowerCase();
-    const commune = person.commune.toLowerCase();
-    const dob = person.person_dob.toLowerCase();
+    const haystack = chuanHoa(
+      [person.person, person.person_dob, person.hamlet, person.village,
+        person.commune, person.province, person.address].join(' ')
+    );
 
     const matchesQuery =
-      query.length < MIN_CHARS ||
-      name.includes(lowerQuery) ||
-      address.includes(lowerQuery) ||
-      hamlet.includes(lowerQuery) ||
-      village.includes(lowerQuery) ||
-      commune.includes(lowerQuery) ||
-      dob.includes(lowerQuery);
+      query.length < MIN_CHARS || haystack.includes(nQuery);
 
     // Lọc năm sinh: khớp chính xác năm
     const matchesDob = dobFilterValue === '' || person.person_dob === dobFilterValue;
