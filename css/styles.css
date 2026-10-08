@@ -643,17 +643,17 @@ button {
 
   .title-gold {
     width: auto;
-    max-width: 62%;
+    max-width: 86%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 2vh;
+    margin-top: 1vh;
   }
 
   .search-zone {
     grid-column: 1;
     grid-row: 2;
     max-width: none;
-    margin-top: 3.5vh;
+    margin-top: 2vh;
     display: flex;
     flex-direction: column;
     align-items: center;
