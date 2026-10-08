@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Tra cứu số hoá địa chỉ nhà các hộ gia đình xã Phù Đổng: tìm kiếm theo tên, năm sinh, xóm và xem chỉ đường trên Google Maps.">
+  <meta name="description" content="Tra cứu số hoá địa chỉ nhà các hộ gia đình xã Phù Đổng: tìm kiếm theo tên, năm sinh, thôn và xem chỉ đường trên Google Maps.">
   <title>SỐ HOÁ ĐỊA CHỈ NHÀ - Xã Phù Đổng</title>
-  <link rel="stylesheet" href="css/styles.css?v=20261008-8">
+  <link rel="stylesheet" href="css/styles.css?v=20261008-13">
 </head>
 <body>
   <div class="bg-map" aria-hidden="true"></div>
@@ -14,12 +14,8 @@
     <header class="hero">
       <div class="hero-top">
         <div class="logo-pair">
-          <div class="logo-circle">
-            <img src="img/logo-doan.jpg" alt="Logo Đoàn Thanh niên Cộng sản Hồ Chí Minh">
-          </div>
-          <div class="logo-circle">
-            <img src="img/logo-tnvn.jpg" alt="Logo Đoàn TN Việt Nam">
-          </div>
+          <img class="logo" src="img/logo-doan.png" alt="Logo Đoàn Thanh niên Cộng sản Hồ Chí Minh">
+          <img class="logo" src="img/logo-tnvn.png" alt="Logo Đoàn TN Việt Nam">
         </div>
         <img class="org-line" src="img/org-line.png" alt="Đoàn Thanh niên Cộng sản Hồ Chí Minh xã Phù Đổng">
       </div>
@@ -57,8 +53,8 @@
           <select id="dobFilter" class="filter-select" aria-label="Lọc theo năm sinh" title="Lọc theo năm sinh">
             <option value="">Năm Sinh</option>
           </select>
-          <select id="hamletFilter" class="filter-select" aria-label="Lọc theo xóm" title="Lọc theo xóm">
-            <option value="">Xóm</option>
+          <select id="villageFilter" class="filter-select" aria-label="Lọc theo thôn" title="Lọc theo thôn">
+            <option value="">Thôn</option>
           </select>
         </div>
         <p class="helper-text">Nhập tối thiểu 3 ký tự</p>
@@ -83,6 +79,6 @@
     </aside>
   </div>
 
-  <script src="js/script.js"></script>
+  <script src="js/script.js?v=20261008-13"></script>
 </body>
 </html>

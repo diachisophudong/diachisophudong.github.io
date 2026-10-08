@@ -4,7 +4,7 @@
    SỐ HOÁ ĐỊA CHỈ NHÀ - Thôn Bảo An - Xã Phù Đổng
    Tìm kiếm phía máy khách (không phụ thuộc bên ngoài):
    - Tối thiểu 3 ký tự, tối đa 8 hộ gợi ý (nhóm theo family_id)
-   - Lọc Năm Sinh (chính xác) + Xóm (chính xác)
+   - Lọc Năm Sinh (chính xác) + Thôn (chính xác)
    - Điều hướng bàn phím, Enter, Esc, debounce 120ms
    ============================================================ */
 
@@ -27,7 +27,7 @@ const suggestionsList = document.getElementById('suggestionsList');
 const resultsContainer = document.getElementById('resultsContainer');
 const resetBtn = document.getElementById('resetBtn');
 const dobFilter = document.getElementById('dobFilter');
-const hamletFilter = document.getElementById('hamletFilter');
+const villageFilter = document.getElementById('villageFilter');
 const searchBtn = document.getElementById('searchBtn');
 const directionBtn = document.getElementById('directionBtn');
 
@@ -53,10 +53,10 @@ function escHtml(value) {
 
 async function loadData() {
   try {
-    const response = await fetch('./data/data.json');
+    const response = await fetch('./data/data.json', { cache: 'no-cache' });
     peopleData = await response.json();
     populateYearDropdown();
-    populateHamletDropdown();
+    populateVillageDropdown();
   } catch (error) {
     console.error('Lỗi tải dữ liệu:', error);
   }
@@ -73,16 +73,16 @@ function populateYearDropdown() {
   }
 }
 
-// Điền danh sách xóm từ dữ liệu (sắp xếp theo tiếng Việt)
-function populateHamletDropdown() {
-  const hamlets = [...new Set(peopleData.map((person) => person.hamlet))]
-    .filter(Boolean)
+// Điền danh sách thôn từ dữ liệu (sắp xếp theo tiếng Việt, bỏ giá trị rỗng)
+function populateVillageDropdown() {
+  const villages = [...new Set(peopleData.map((person) => person.village))]
+    .filter((village) => typeof village === 'string' && village.trim() !== '')
     .sort((a, b) => a.localeCompare(b, 'vi'));
-  hamlets.forEach((hamlet) => {
+  villages.forEach((village) => {
     const option = document.createElement('option');
-    option.value = hamlet;
-    option.textContent = hamlet;
-    hamletFilter.appendChild(option);
+    option.value = village;
+    option.textContent = village;
+    villageFilter.appendChild(option);
   });
 }
 
@@ -100,7 +100,7 @@ function initializeEventListeners() {
 
   resetBtn.addEventListener('click', handleReset);
   dobFilter.addEventListener('change', runSearch);
-  hamletFilter.addEventListener('change', runSearch);
+  villageFilter.addEventListener('change', runSearch);
   document.addEventListener('click', handleDocumentClick);
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
@@ -139,7 +139,7 @@ function runSearch() {
   const query = searchBox.value.trim();
 
   // Hiện / ẩn nút xoá
-  if (query.length > 0 || dobFilter.value || hamletFilter.value) {
+  if (query.length > 0 || dobFilter.value || villageFilter.value) {
     resetBtn.classList.add('show');
   } else {
     resetBtn.classList.remove('show');
@@ -210,7 +210,7 @@ function handleDocumentClick(e) {
 function filterAndGroupData(query) {
   const lowerQuery = query.toLowerCase();
   const dobFilterValue = dobFilter.value.trim();
-  const hamletFilterValue = hamletFilter.value.trim().toLowerCase();
+  const villageFilterValue = villageFilter.value.trim().toLowerCase();
 
   // Kiểm tra giá trị lọc năm sinh
   let isValidDobFilter = true;
@@ -248,11 +248,11 @@ function filterAndGroupData(query) {
     // Lọc năm sinh: khớp chính xác năm
     const matchesDob = dobFilterValue === '' || person.person_dob === dobFilterValue;
 
-    // Lọc xóm: khớp chính xác tên xóm (so không phân biệt hoa thường)
-    const matchesHamlet =
-      hamletFilterValue === '' || person.hamlet.trim().toLowerCase() === hamletFilterValue;
+    // Lọc thôn: khớp chính xác tên thôn (so không phân biệt hoa thường)
+    const matchesVillage =
+      villageFilterValue === '' || person.village.trim().toLowerCase() === villageFilterValue;
 
-    return matchesQuery && matchesDob && matchesHamlet;
+    return matchesQuery && matchesDob && matchesVillage;
   });
 
   // Lấy danh sách family_id duy nhất từ kết quả khớp
@@ -300,7 +300,7 @@ function displaySuggestions(familyGroups) {
       <div class="suggestion-text">
         <div class="suggestion-address">${escHtml(matchedPerson.person)} - ${escHtml(matchedPerson.person_dob)}</div>
         ${otherMembersNames ? `<div class="suggestion-family">(Gia đình: ${otherMembersNames})</div>` : ''}
-        <div class="suggestion-meta">${memberCount} người - ${escHtml(matchedPerson.hamlet)}, ${escHtml(matchedPerson.village)}, ${escHtml(matchedPerson.commune)}</div>
+        <div class="suggestion-meta">${memberCount} người - ${[matchedPerson.hamlet, matchedPerson.village, matchedPerson.commune].filter(Boolean).map(escHtml).join(', ')}</div>
       </div>
     `;
 
@@ -360,10 +360,11 @@ function displayResults(familyMembers, searchedPerson) {
           <span class="result-detail-label">Năm Sinh</span>
           <span class="result-detail-value">${escHtml(searchedPerson.person_dob)}</span>
         </div>
+        ${searchedPerson.hamlet ? `
         <div class="result-detail-item">
           <span class="result-detail-label">Xóm</span>
           <span class="result-detail-value">${escHtml(searchedPerson.hamlet)}</span>
-        </div>
+        </div>` : ''}
         <div class="result-detail-item">
           <span class="result-detail-label">Thôn</span>
           <span class="result-detail-value">${escHtml(searchedPerson.village)}</span>
@@ -396,7 +397,7 @@ function handleReset() {
   clearTimeout(debounceTimer);
   searchBox.value = '';
   dobFilter.value = '';
-  hamletFilter.value = '';
+  villageFilter.value = '';
   resetBtn.classList.remove('show');
   hideSuggestions();
   suggestionsList.innerHTML = '';
