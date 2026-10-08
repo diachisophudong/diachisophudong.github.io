@@ -114,11 +114,13 @@ button {
   align-items: center;
   gap: 3vw;
   margin-bottom: 0.15vh;
+  flex-shrink: 0;
 }
 
 .logo {
   height: clamp(56px, 12vw, 92px);
   width: auto;
+  flex-shrink: 0;
 }
 
 .org-line {
