@@ -86,7 +86,7 @@ button {
   width: 100%;
   max-width: 1240px;
   margin: 0 auto;
-  padding: 0.8vh 18px 34px;
+  padding: 0 6px 26px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -113,25 +113,25 @@ button {
   justify-content: center;
   align-items: center;
   gap: 3vw;
-  margin-bottom: 0.15vh;
+  margin-bottom: 0;
   flex-shrink: 0;
 }
 
 .logo {
-  height: clamp(56px, 12vw, 92px);
+  height: clamp(44px, 10vw, 76px);
   width: auto;
   flex-shrink: 0;
 }
 
 .org-line {
-  width: 85%;
-  max-width: 430px;
-  margin-bottom: 0.4vh;
+  width: 78%;
+  max-width: 400px;
+  margin-bottom: 0;
 }
 
 .title-gold {
-  width: 90%;
-  max-width: 436px;
+  width: 84%;
+  max-width: 410px;
 }
 
 /* ============================ TÌM KIẾM ============================ */
