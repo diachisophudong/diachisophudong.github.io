@@ -659,8 +659,9 @@ button {
   }
 
   .title-gold {
-    width: 100%;
-    max-width: none;
+    width: auto;
+    max-width: 62%;
+    margin-left: 38%;
     margin-top: 2vh;
   }
 
