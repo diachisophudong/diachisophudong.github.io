@@ -21,7 +21,7 @@
   --frame: #41517f;
   --violet: #545bb6;
   --glass-bg: rgba(157, 188, 220, 0.58);
-  --glass-bg-strong: rgba(157, 188, 220, 0.40);
+  --glass-bg-strong: rgba(255, 255, 255, 0.88);
   --glass-border: rgba(255, 255, 255, 0.35);
 }
 
@@ -340,7 +340,7 @@ button {
   padding: 11px 12px;
   border-radius: 12px;
   border-left: 3px solid var(--cyan);
-  background: rgba(255, 255, 255, 0.14);
+  background: rgba(13, 27, 61, 0.045);
   cursor: pointer;
   transition: background 0.15s ease;
 }
