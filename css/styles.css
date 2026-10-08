@@ -139,7 +139,7 @@ button {
 .search-zone {
   width: 100%;
   max-width: 540px;
-  margin-top: 0.3vh;
+  margin-top: 2.8vh;
   display: flex;
   flex-direction: column;
   align-items: center;
