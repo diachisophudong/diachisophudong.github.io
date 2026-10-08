@@ -642,7 +642,8 @@ button {
   .title-gold {
     width: auto;
     max-width: 62%;
-    margin-left: 38%;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 2vh;
   }
 
@@ -652,13 +653,12 @@ button {
     max-width: none;
     margin-top: 3.5vh;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
-    /* Cả cụm tìm kiếm (bar + select + helper + nút) nhích phải cùng nhau
-       để robot đứng bên trái; 38% (không phải 32%) vì mép phải robot
-       = 1vw + min(16vw,215px) — 32% sẽ đè lên robot ở 769/1366/1920. */
-    padding-left: 38%;
+  }
+
+  .search-container {
+    width: min(600px, 100%);
   }
 
   .search-box-wrapper {
@@ -682,17 +682,16 @@ button {
   }
 
   .helper-text {
-    text-align: left;
+    text-align: center;
   }
 
   .suggestions-list {
     max-height: min(46vh, 168px);
   }
 
-  /* Wrapper hàng nút chỉ có ý nghĩa trên mobile; trên PC hai nút
-     vẫn là item trực tiếp của .search-zone như trước. */
+  /* Hàng nút nằm trong cụm tìm kiếm căn giữa, rộng bằng cụm. */
   .actions-row {
-    display: contents;
+    width: min(600px, 100%);
   }
 
   /* Nhãn tiếng Việt dài: cấm xuống dòng trong nút trên PC. */
@@ -721,11 +720,11 @@ button {
 
   .robot {
     position: absolute;
-    left: 1vw;
-    bottom: 15%;
-    top: auto;
-    right: auto;
-    width: min(16vw, 215px);
+    left: auto;
+    right: 3vw;
+    top: 22%;
+    bottom: auto;
+    width: min(30vw, 430px);
     max-width: none;
     z-index: 1;
   }
@@ -741,10 +740,9 @@ button {
   }
 
   .results-container {
-    width: 92%;
-    max-width: 46vw;
-    margin: auto 0 0;
-    align-self: center;
+    width: min(600px, 100%);
+    max-width: none;
+    margin: 2.5vh 0 0;
   }
 }
 
