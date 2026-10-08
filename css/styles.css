@@ -604,10 +604,10 @@ button {
 @media (min-width: 769px) {
   .page {
     position: relative;
-    max-width: 1560px;
+    max-width: min(86vw, 1140px);
     padding: 1vh 3vw 2vh;
     display: grid;
-    grid-template-columns: minmax(0, min(46vw, 680px)) minmax(0, 1fr);
+    grid-template-columns: minmax(0, min(46vw, 680px)) auto;
     grid-template-rows: auto 1fr;
     column-gap: 2.5vw;
     align-items: stretch;
@@ -715,21 +715,18 @@ button {
   .right-zone {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     grid-column: 2;
     grid-row: 1 / -1;
     min-width: 0;
   }
 
   .robot {
-    position: absolute;
-    left: min(50vw, 716px);
-    right: auto;
-    top: 24%;
-    bottom: auto;
+    position: static;
     width: min(26vw, 380px);
     max-width: none;
     transform: scaleX(-1);
-    z-index: 1;
   }
 
   .btn-directions {
