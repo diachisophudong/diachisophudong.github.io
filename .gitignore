@@ -2,12 +2,15 @@
 img_new/
 img2/
 img3/
+img4/
+img5/
 .qa/
 .mimosa/
 .zcode/
 
-# File Excel nguồn (chỉ publish data.json)
+# File Excel nguồn + backup dữ liệu (chỉ publish data.json)
 data/*.xlsx
+data/data-backup*.json
 
 # Ghi chú nội bộ cho agent
 AGENTS.md
