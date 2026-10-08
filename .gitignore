@@ -1,0 +1,13 @@
+# Thư mục làm việc / nguồn ảnh — không xuất bản
+img_new/
+img2/
+img3/
+.qa/
+.mimosa/
+.zcode/
+
+# File Excel nguồn (chỉ publish data.json)
+data/*.xlsx
+
+# Ghi chú nội bộ cho agent
+AGENTS.md

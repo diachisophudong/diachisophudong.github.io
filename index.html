@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tra cứu số hoá địa chỉ nhà các hộ gia đình xã Phù Đổng: tìm kiếm theo tên, năm sinh, xóm và xem chỉ đường trên Google Maps.">
+  <title>SỐ HOÁ ĐỊA CHỈ NHÀ - Xã Phù Đổng</title>
+  <link rel="stylesheet" href="css/styles.css?v=20261008-7">
+</head>
+<body>
+  <div class="bg-map" aria-hidden="true"></div>
+
+  <div class="page">
+    <header class="hero">
+      <div class="hero-top">
+        <div class="logo-pair">
+          <div class="logo-circle">
+            <img src="img/logo-doan.jpg" alt="Logo Đoàn Thanh niên Cộng sản Hồ Chí Minh">
+          </div>
+          <div class="logo-circle">
+            <img src="img/logo-tnvn.jpg" alt="Logo Đoàn TN Việt Nam">
+          </div>
+        </div>
+        <img class="org-line" src="img/org-line.png" alt="Đoàn Thanh niên Cộng sản Hồ Chí Minh xã Phù Đổng">
+      </div>
+      <img class="title-gold" src="img/title-gold.png" alt="Số hoá địa chỉ nhà - Xã Phù Đổng">
+    </header>
+
+    <main class="search-zone">
+      <div class="search-container">
+        <div class="search-bar-block">
+          <div class="search-box-wrapper">
+            <span class="search-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
+            </span>
+            <input
+              type="text"
+              id="searchBox"
+              class="search-box"
+              placeholder="Nhập tên, năm sinh hoặc địa chỉ…"
+              autocomplete="off"
+              spellcheck="false"
+              role="combobox"
+              aria-expanded="false"
+              aria-controls="suggestionsList"
+              aria-autocomplete="list"
+              aria-label="Tìm kiếm địa chỉ nhà"
+            >
+            <button type="button" id="resetBtn" class="reset-btn" aria-label="Xoá tìm kiếm" title="Xoá tìm kiếm">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+            </button>
+          </div>
+          <ul id="suggestionsList" class="suggestions-list" role="listbox" aria-label="Danh sách gợi ý"></ul>
+        </div>
+
+        <div class="filter-inputs">
+          <select id="dobFilter" class="filter-select" aria-label="Lọc theo năm sinh" title="Lọc theo năm sinh">
+            <option value="">Năm Sinh</option>
+          </select>
+          <select id="hamletFilter" class="filter-select" aria-label="Lọc theo xóm" title="Lọc theo xóm">
+            <option value="">Xóm</option>
+          </select>
+        </div>
+        <p class="helper-text">Nhập tối thiểu 3 ký tự</p>
+      </div>
+
+      <div class="actions-row">
+        <button type="button" id="searchBtn" class="btn btn-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
+          <span>Tra cứu địa chỉ</span>
+        </button>
+
+        <button type="button" id="directionBtn" class="btn btn-directions">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+          <span>Chỉ đường</span>
+        </button>
+      </div>
+    </main>
+
+    <aside class="right-zone">
+      <img class="robot" src="img/robot.png" alt="" aria-hidden="true">
+      <div id="resultsContainer" class="results-container" aria-live="polite"></div>
+    </aside>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
