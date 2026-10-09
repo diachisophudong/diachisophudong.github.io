@@ -4,6 +4,7 @@
    SỐ HOÁ ĐỊA CHỈ NHÀ - Thôn Bảo An - Xã Phù Đổng
    Tìm kiếm phía máy khách (không phụ thuộc bên ngoài):
    - Tối thiểu 3 ký tự, tối đa 8 hộ gợi ý (nhóm theo family_id)
+   - Tìm theo TÊN, khớp tiền tố từng từ ("yen" ra "Yến", không ra "Nguyễn")
    - Lọc Năm Sinh (chính xác) + Thôn (chính xác)
    - Điều hướng bàn phím, Enter, Esc, debounce 120ms
    ============================================================ */
@@ -216,9 +217,20 @@ function handleDocumentClick(e) {
   }
 }
 
+// So khớp từ khoá với TÊN theo TIỀN TỐ TỪNG TỪ trong tên:
+// mỗi từ khoá phải là tiền tố của ít nhất một từ trong tên
+// ("yen" khớp "Yến" nhưng không khớp "Nguyễn" — tránh hiện người không liên quan)
+function nameMatchesQuery(name, queryTokens) {
+  const nameWords = chuanHoa(name).split(/\s+/).filter(Boolean);
+  return queryTokens.every((token) =>
+    nameWords.some((word) => word.startsWith(token))
+  );
+}
+
 // Lọc dữ liệu theo từ khoá + bộ lọc, nhóm theo family_id
 function filterAndGroupData(query) {
-  const nQuery = chuanHoa(query);
+  // Tách từ khoá thành từng từ (theo khoảng trắng) để khớp tiền tố
+  const queryTokens = chuanHoa(query).split(/\s+/).filter(Boolean);
   const dobFilterValue = dobFilter.value.trim();
   const villageFilterValue = villageFilter.value.trim().toLowerCase();
 
@@ -241,7 +253,7 @@ function filterAndGroupData(query) {
 
     // Chỉ so khớp từ khoá với TÊN người — bỏ qua năm sinh và địa chỉ
     const matchesQuery =
-      query.length < MIN_CHARS || chuanHoa(person.person).includes(nQuery);
+      query.length < MIN_CHARS || nameMatchesQuery(person.person, queryTokens);
 
     // Lọc năm sinh: khớp chính xác năm
     const matchesDob = dobFilterValue === '' || person.person_dob === dobFilterValue;
