@@ -621,9 +621,9 @@ button {
   }
 
   .hero-top {
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    gap: 1.8vw;
+    gap: 1vh;
   }
 
   .logo-pair {
@@ -635,9 +635,9 @@ button {
     height: clamp(96px, 7vw, 120px);
   }
 
+  /* Org-line nằm DƯỚI hàng logo, căn giữa cân với badge "CÔNG TRÌNH THANH NIÊN" */
   .org-line {
-    flex: 1;
-    max-width: 85%;
+    max-width: min(560px, 95%);
     margin-bottom: 0;
   }
 
