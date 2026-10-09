@@ -239,13 +239,9 @@ function filterAndGroupData(query) {
       return false;
     }
 
-    const haystack = chuanHoa(
-      [person.person, person.person_dob, person.hamlet, person.village,
-        person.commune, person.province, person.address].join(' ')
-    );
-
+    // Chỉ so khớp từ khoá với TÊN người — bỏ qua năm sinh và địa chỉ
     const matchesQuery =
-      query.length < MIN_CHARS || haystack.includes(nQuery);
+      query.length < MIN_CHARS || chuanHoa(person.person).includes(nQuery);
 
     // Lọc năm sinh: khớp chính xác năm
     const matchesDob = dobFilterValue === '' || person.person_dob === dobFilterValue;
